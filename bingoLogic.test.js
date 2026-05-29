@@ -4,6 +4,8 @@ const assert = require('node:assert/strict');
 const {
   BOARD_SIZE,
   MAX_TEXT_LENGTH,
+  APP_EXAMPLES,
+  APP_OPTIONS,
   countBingos,
   createEmptyBoard,
   isBoardComplete,
@@ -58,4 +60,22 @@ test('limits each bingo cell to fewer than 10 characters', () => {
   assert.equal(MAX_TEXT_LENGTH, 9);
   assert.equal(isCellTextValid('123456789'), true);
   assert.equal(isCellTextValid('1234567890'), false);
+});
+
+test('provides app options and examples for the side guide', () => {
+  assert.deepEqual(APP_OPTIONS, [
+    '메시지 앱',
+    '계산기 앱',
+    '카메라 앱',
+    '동영상 편집 앱',
+    '쇼핑 앱',
+    '퀴즈 앱',
+    '타이머 앱',
+    '네비게이션 앱',
+    '번역 앱',
+    '메모장 앱',
+    '사전 앱',
+    '일기 예보 앱',
+  ]);
+  assert.deepEqual(APP_EXAMPLES, ['카카오톡', 'Melon 앱', '...']);
 });

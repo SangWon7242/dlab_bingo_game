@@ -13,6 +13,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
@@ -40,8 +44,10 @@ button:disabled {
 }
 
 .app-shell {
-  display: flex;
-  width: min(760px, calc(100% - 32px));
+  display: grid;
+  grid-template-columns: minmax(520px, 760px) minmax(280px, 360px);
+  gap: 26px;
+  width: min(1160px, calc(100% - 32px));
   min-height: 100vh;
   margin: 0 auto;
   padding: 24px 0 90px;
@@ -114,6 +120,33 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
+}
+
+.instructions {
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: #fff;
+}
+
+.instructions ol {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 22px;
+}
+
+.instructions li {
+  color: #111827;
+  font-size: clamp(15px, 1.7vw, 18px);
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.instructions span {
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .message {
@@ -295,6 +328,71 @@ h1 {
   color: #fff;
 }
 
+.guide-panel {
+  align-self: center;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.guide-image {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.guide-section {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.guide-toggle {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 16px;
+  background: #111827;
+  color: #fff;
+  font-weight: 900;
+  text-align: left;
+}
+
+.app-options,
+.app-examples {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.app-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.app-options span,
+.app-examples span {
+  display: grid;
+  min-height: 40px;
+  place-items: center;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #3f3f46;
+  font-size: 15px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.app-examples {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.app-examples span {
+  background: #fff8e1;
+  color: #111827;
+}
+
 .bingo-overlay {
   position: fixed;
   inset: 0;
@@ -350,7 +448,18 @@ h1 {
 
 @media (max-width: 920px) {
   .app-shell {
+    grid-template-columns: 1fr;
+    align-items: start;
     padding: 16px 0 86px;
+  }
+
+  .guide-panel {
+    align-self: stretch;
+  }
+
+  .guide-image {
+    max-height: 240px;
+    object-fit: contain;
   }
 }
 
@@ -363,6 +472,15 @@ h1 {
   .controls {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .instructions {
+    padding: 12px;
+  }
+
+  .instructions span {
+    display: block;
+    white-space: normal;
   }
 
   .button-row {
@@ -380,5 +498,9 @@ h1 {
   .cell-input {
     padding: 6px;
     font-size: 15px;
+  }
+
+  .app-options {
+    grid-template-columns: 1fr;
   }
 }

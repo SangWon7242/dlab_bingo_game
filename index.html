@@ -20,6 +20,16 @@
           </div>
         </div>
 
+        <section class="instructions" aria-label="게임 시작 전 안내">
+          <ol>
+            <li>&lt;보기&gt;에 있는 앱으로 빨간색 빈칸을 채우기</li>
+            <li>
+              사용한 경험이 있는 앱 이름을 노란색 빈칸에 채우기
+              <span>(단, 게임 앱은 한번만 적으세요.)</span>
+            </li>
+          </ol>
+        </section>
+
         <div class="controls" aria-label="게임 설정">
           <fieldset class="goal-selector" id="goal-selector">
             <legend>목표 빙고</legend>
@@ -49,6 +59,36 @@
           <div class="board" id="board" aria-label="빙고판"></div>
         </div>
       </section>
+
+      <aside class="guide-panel" aria-label="보기와 예시">
+        <img class="guide-image" src="보기.png" alt="보기와 예시 이미지" />
+
+        <section class="guide-section">
+          <button
+            class="guide-toggle"
+            id="options-toggle"
+            type="button"
+            aria-expanded="true"
+            aria-controls="options-list"
+          >
+            보기 접힘
+          </button>
+          <div class="app-options" id="options-list"></div>
+        </section>
+
+        <section class="guide-section">
+          <button
+            class="guide-toggle"
+            id="examples-toggle"
+            type="button"
+            aria-expanded="true"
+            aria-controls="examples-list"
+          >
+            예시 접힘
+          </button>
+          <div class="app-examples" id="examples-list"></div>
+        </section>
+      </aside>
     </main>
 
     <div class="bingo-overlay" id="bingo-overlay" aria-live="assertive" aria-hidden="true">

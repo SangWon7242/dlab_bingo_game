@@ -1,5 +1,20 @@
 const BOARD_SIZE = 4;
 const MAX_TEXT_LENGTH = 9;
+const APP_OPTIONS = [
+  '메시지 앱',
+  '계산기 앱',
+  '카메라 앱',
+  '동영상 편집 앱',
+  '쇼핑 앱',
+  '퀴즈 앱',
+  '타이머 앱',
+  '네비게이션 앱',
+  '번역 앱',
+  '메모장 앱',
+  '사전 앱',
+  '일기 예보 앱',
+];
+const APP_EXAMPLES = ['카카오톡', 'Melon 앱', '...'];
 
 function createEmptyBoard() {
   return Array.from({ length: BOARD_SIZE * BOARD_SIZE }, () => ({
@@ -46,6 +61,8 @@ if (typeof module !== 'undefined') {
   module.exports = {
     BOARD_SIZE,
     MAX_TEXT_LENGTH,
+    APP_EXAMPLES,
+    APP_OPTIONS,
     countBingos,
     createEmptyBoard,
     isBoardComplete,

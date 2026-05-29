@@ -6,6 +6,10 @@
   const resetButton = document.querySelector('#reset-button');
   const overlay = document.querySelector('#bingo-overlay');
   const messageElement = document.querySelector('#message');
+  const optionsList = document.querySelector('#options-list');
+  const examplesList = document.querySelector('#examples-list');
+  const optionsToggle = document.querySelector('#options-toggle');
+  const examplesToggle = document.querySelector('#examples-toggle');
   const goalInputs = Array.from(document.querySelectorAll('input[name="goal"]'));
 
   let board = createEmptyBoard();
@@ -36,6 +40,30 @@
   function showMessage(message) {
     messageElement.textContent = message;
     messageElement.classList.toggle('is-visible', Boolean(message));
+  }
+
+  function renderGuide() {
+    optionsList.innerHTML = '';
+    examplesList.innerHTML = '';
+
+    APP_OPTIONS.forEach((item) => {
+      const option = document.createElement('span');
+      option.textContent = item;
+      optionsList.append(option);
+    });
+
+    APP_EXAMPLES.forEach((item) => {
+      const example = document.createElement('span');
+      example.textContent = item;
+      examplesList.append(example);
+    });
+  }
+
+  function toggleGuide(button, panel, label) {
+    const shouldCollapse = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!shouldCollapse));
+    button.textContent = shouldCollapse ? `${label} 펼침` : `${label} 접힘`;
+    panel.hidden = shouldCollapse;
   }
 
   function syncBingoState() {
@@ -153,7 +181,10 @@
   startButton.addEventListener('click', startGame);
   endButton.addEventListener('click', endGame);
   resetButton.addEventListener('click', resetGame);
+  optionsToggle.addEventListener('click', () => toggleGuide(optionsToggle, optionsList, '보기'));
+  examplesToggle.addEventListener('click', () => toggleGuide(examplesToggle, examplesList, '예시'));
   goalInputs.forEach((input) => input.addEventListener('change', syncBingoState));
 
+  renderGuide();
   renderBoard();
 })();
