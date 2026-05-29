@@ -1,0 +1,384 @@
+:root {
+  color-scheme: light;
+  --ink: #171717;
+  --muted: #667085;
+  --line: #d6dde8;
+  --red: #ff0808;
+  --gold: #ffd967;
+  --blue: #1f4fd6;
+  --green: #22a66a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: #f5f5f5;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.app-shell {
+  display: flex;
+  width: min(760px, calc(100% - 32px));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 24px 0 90px;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(34px, 6vw, 58px);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.status-card {
+  display: grid;
+  min-width: 110px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+}
+
+.status-card span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-card strong {
+  color: var(--blue);
+  font-size: 38px;
+  line-height: 1;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.message {
+  min-height: 24px;
+  margin: 0 0 10px;
+  color: var(--red);
+  font-size: 15px;
+  font-weight: 900;
+  text-align: center;
+  visibility: hidden;
+}
+
+.message.is-visible {
+  visibility: visible;
+}
+
+.goal-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.goal-selector legend {
+  width: 100%;
+  margin-bottom: 2px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.goal-selector label {
+  display: inline-flex;
+}
+
+.goal-selector input {
+  position: absolute;
+  opacity: 0;
+}
+
+.goal-selector span {
+  min-width: 74px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 13px;
+  color: #344054;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.goal-selector input:checked + span {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.goal-selector input:disabled + span {
+  opacity: 0.52;
+}
+
+.button-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 42px;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-weight: 900;
+}
+
+.primary-button {
+  background: var(--red);
+  color: #fff;
+}
+
+.secondary-button {
+  border: 1px solid var(--line);
+  background: #f8fafc;
+  color: var(--ink);
+}
+
+.board-wrap {
+  display: grid;
+  flex: 1;
+  place-items: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  width: min(100%, 650px);
+  aspect-ratio: 1;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  background: #000;
+}
+
+.cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  cursor: text;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+  background: var(--red);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background 120ms ease;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(13),
+.cell:nth-child(16) {
+  background: var(--gold);
+}
+
+.cell.is-selected {
+  background: var(--green);
+  box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.65);
+  transform: none;
+}
+
+.cell.is-locked:not(.is-selected) {
+  cursor: pointer;
+}
+
+.cell-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  padding: clamp(8px, 2vw, 16px);
+  background: transparent;
+  color: #111827;
+  font-size: clamp(16px, 3.2vw, 32px);
+  font-weight: 900;
+  line-height: 1.18;
+  text-align: center;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+  white-space: pre-wrap;
+  caret-color: #111827;
+}
+
+.cell-input:empty::before {
+  content: attr(data-placeholder);
+  color: rgba(17, 24, 39, 0.42);
+}
+
+.cell.is-locked .cell-input {
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.cell.is-selected .cell-input {
+  color: #fff;
+}
+
+.bingo-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  z-index: 20;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.34);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.bingo-overlay.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bingo-overlay div {
+  border: 8px solid #fff;
+  border-radius: 8px;
+  padding: clamp(24px, 6vw, 58px) clamp(30px, 9vw, 92px);
+  background: var(--red);
+  color: #fff;
+  font-size: clamp(58px, 13vw, 160px);
+  font-weight: 1000;
+  line-height: 0.9;
+  letter-spacing: 0;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28);
+}
+
+.reset-button {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 30;
+  display: none;
+  min-height: 50px;
+  border-radius: 999px;
+  padding: 0 22px;
+  background: #111827;
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.25);
+}
+
+.reset-button.is-visible {
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 920px) {
+  .app-shell {
+    padding: 16px 0 86px;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-panel {
+    padding: 16px;
+  }
+
+  .hero,
+  .controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .button-row {
+    justify-content: stretch;
+  }
+
+  .button-row button {
+    flex: 1;
+  }
+
+  .board {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .cell-input {
+    padding: 6px;
+    font-size: 15px;
+  }
+}

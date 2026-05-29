@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MC Bingo Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-panel" aria-labelledby="game-title">
+        <div class="hero">
+          <div>
+            <p class="eyebrow">4 x 4 BINGO</p>
+            <h1 id="game-title">BINGO</h1>
+          </div>
+          <div class="status-card" aria-live="polite">
+            <span>현재 빙고</span>
+            <strong id="bingo-count">0</strong>
+          </div>
+        </div>
+
+        <div class="controls" aria-label="게임 설정">
+          <fieldset class="goal-selector" id="goal-selector">
+            <legend>목표 빙고</legend>
+            <label>
+              <input type="radio" name="goal" value="2" checked />
+              <span>2빙고</span>
+            </label>
+            <label>
+              <input type="radio" name="goal" value="3" />
+              <span>3빙고</span>
+            </label>
+            <label>
+              <input type="radio" name="goal" value="4" />
+              <span>4빙고</span>
+            </label>
+          </fieldset>
+
+          <div class="button-row">
+            <button class="primary-button" id="start-button" type="button">게임 스타트</button>
+            <button class="secondary-button" id="end-button" type="button" disabled>게임 종료</button>
+          </div>
+        </div>
+
+        <p class="message" id="message" role="alert" aria-live="assertive"></p>
+
+        <div class="board-wrap">
+          <div class="board" id="board" aria-label="빙고판"></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="bingo-overlay" id="bingo-overlay" aria-live="assertive" aria-hidden="true">
+      <div>BINGO</div>
+    </div>
+
+    <button class="reset-button" id="reset-button" type="button">처음부터</button>
+
+    <script src="bingoLogic.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
