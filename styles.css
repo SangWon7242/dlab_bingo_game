@@ -335,14 +335,6 @@ h1 {
   min-width: 0;
 }
 
-.guide-image {
-  display: block;
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fff;
-}
-
 .guide-section {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -457,10 +449,6 @@ h1 {
     align-self: stretch;
   }
 
-  .guide-image {
-    max-height: 240px;
-    object-fit: contain;
-  }
 }
 
 @media (max-width: 640px) {
